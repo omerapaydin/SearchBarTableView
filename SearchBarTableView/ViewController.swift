@@ -30,6 +30,16 @@ class ViewController: UIViewController ,UISearchBarDelegate,UITableViewDataSourc
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        
+        if searchText == "" {//Arama yapılmıyor
+            aramaYapiliyorMu = false
+        }else{
+            aramaYapiliyorMu = true
+            
+            aramaSonucuUlkeler = ulkeler.filter({$0.lowercased().contains(searchText.lowercased())})
+        }
+        
+        tableView.reloadData()
     }
     
     
@@ -44,6 +54,16 @@ class ViewController: UIViewController ,UISearchBarDelegate,UITableViewDataSourc
         }else{
             return ulkeler.count
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if aramaYapiliyorMu {
+            print("Seçilen Ülke : \(aramaSonucuUlkeler[indexPath.row])")
+        }else{
+            print("Seçilen Ülke : \(ulkeler[indexPath.row])")
+        }
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
