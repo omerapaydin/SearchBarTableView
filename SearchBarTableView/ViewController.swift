@@ -7,12 +7,46 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController ,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate{
 
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var aramaYapiliyorMu = false
+    
+    var ulkeler:[String] = [String]()
+    var aramaSonucuUlkeler:[String] = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        ulkeler = ["Türkiye","Almanya","Japonya","Rusya","İtalya","Güney Kore","Fransa","Mısır"]
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        searchBar.delegate = self
+        
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if aramaYapiliyorMu {
+            return aramaSonucuUlkeler.count
+        }else{
+            return ulkeler.count
+        }
+    }
+    
+    
 
 
 }
