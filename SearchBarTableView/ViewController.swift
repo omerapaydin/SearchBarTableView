@@ -46,6 +46,18 @@ class ViewController: UIViewController ,UISearchBarDelegate,UITableViewDataSourc
         }
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ulkelerHucre", for: indexPath)
+        
+        if aramaYapiliyorMu {
+             cell.textLabel?.text = aramaSonucuUlkeler[indexPath.row]
+        }else{
+             cell.textLabel?.text = ulkeler[indexPath.row]
+        }
+        
+        return cell
+    }
+    
     
 
 
